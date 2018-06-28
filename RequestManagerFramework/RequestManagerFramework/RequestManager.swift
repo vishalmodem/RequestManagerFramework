@@ -70,8 +70,10 @@ private enum RequestCreator{
         return request
     }
 }
+
+
 public class RequestManager {
-    static let shared = RequestManager()
+    public static let shared = RequestManager()
     public func getActorsData(_ completion: @escaping ([Actor])->()){
         makeRequest(request: RequestCreator.get) { (actors) in
             completion(actors)
@@ -101,10 +103,9 @@ public class RequestManager {
         let requestObject = request.urlRequest()
         URLSession.shared.dataTask(with: requestObject){ (data, response, error) in
             guard let info = data, error == nil, response != nil else{
-                print(error?.localizedDescription)
+                print(error!.localizedDescription)
                 return
             }
-            //print(String(data: info, encoding: String.Encoding.utf8))
             let decoder = JSONDecoder()
             do {
                 let  downloadedActors = try decoder.decode(Actors.self, from: info)
@@ -125,3 +126,4 @@ public class RequestManager {
     }
     
 }
+

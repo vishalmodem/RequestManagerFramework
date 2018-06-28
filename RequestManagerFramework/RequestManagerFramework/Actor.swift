@@ -9,12 +9,11 @@
 import Foundation
 
 public struct Actors: Codable {
-    var actors : [Actor]?
+    public var actors : [Actor]?
    
 }
 public struct Actor : Codable {
-    let name : String?
-    let image : String?
-    
+    public let name : String?
+    public let image : String?
     
 }
